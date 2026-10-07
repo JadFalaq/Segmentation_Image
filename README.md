@@ -1,113 +1,47 @@
-# Segmentation d'Images - Deep Learning
+# Segmentation d'images avec U-Net
 
-Ce projet explore différentes techniques de segmentation d'images en utilisant l'apprentissage profond, notamment avec les architectures U-Net et knowledge distillation.
+Ce depot rassemble les notebooks du projet V2 de segmentation semantique d'images avec le dataset Cityscapes.
 
-## 📁 Structure du Projet
+## Contenu
 
+- `dataset_visualisation.ipynb` : exploration et visualisation des images et des annotations Cityscapes.
+- `model_unet_baseline.ipynb` : preparation des masques et experimentation avec un modele U-Net de reference.
+- `unet_selfdistill.ipynb` : exploration et evaluation d'un modele U-Net avec self-distillation.
+- `requirements.txt` : instantane des dependances Python de l'environnement d'origine.
+
+## Donnees
+
+Les notebooks de visualisation et de baseline attendent le dataset Cityscapes extrait a cet emplacement, a la racine du projet :
+
+```text
+data/
+└── cityscapes/
+    ├── leftImg8bit/
+    │   ├── train/
+    │   ├── val/
+    │   └── test/
+    └── gtFine/
+        ├── train/
+        ├── val/
+        └── test/
 ```
-Deep Learning/
-├── PROJET/                          # Projet principal de segmentation
-│   ├── notebooks/
-│   │   └── camvid_unet_selfdistill.ipynb
-│   ├── data/camvid/                # Dataset CamVid
-│   │   ├── images/
-│   │   └── masks/
-│   ├── outputs/
-│   │   ├── checkpoints/            # Modèles entraînés
-│   │   ├── figures/                # Visualisations
-│   │   ├── metrics/                # Métriques d'évaluation
-│   │   └── predictions/            # Prédictions du modèle
-│   └── requirements.txt
-│
-├── TP1/                             # Travail pratique 1 - Préparation de données
-├── TP2/                             # Travail pratique 2 - Classification
-├── TP3/                             # Travail pratique 3
-├── TP4/                             # Travail pratique 4 - Détection YOLOv8
-│
-└── README.md
-```
 
-## 🎯 Objectifs
+Les images doivent conserver le nommage Cityscapes, par exemple `*_leftImg8bit.png`, et les annotations fines `*_gtFine_labelIds.png`. Le dataset n'est pas inclus dans ce depot; il doit etre obtenu aupres de Cityscapes selon ses conditions d'acces.
 
-- **Segmentation d'images sémantique** sur le dataset CamVid
-- **U-Net baseline** pour la segmentation
-- **Knowledge Distillation** pour l'optimisation du modèle
-- **Classification binaire et multiclass** sur des données médicales
-- **Détection d'objets** avec YOLOv8
+## Utilisation
 
-## 🚀 Démarrage Rapide
-
-### Prérequis
-
-- Python 3.8+
-- GPU recommandé (CUDA)
-
-### Installation
+1. Clonez le depot et placez-vous dans son dossier.
+2. Creez un environnement Python adapte a votre systeme.
+3. Installez les dependances necessaires a votre environnement. `requirements.txt` est un instantane de l'environnement d'origine et peut contenir des versions specifiques a une plateforme; adaptez-le si besoin.
+4. Lancez Jupyter et ouvrez le notebook voulu :
 
 ```bash
-# Cloner le repository
-git clone https://github.com/JadFalaq/Segmentation_Image.git
-cd Deep\ Learning
-
-# Créer un environnement virtuel
-python -m venv .venv
-source .venv/bin/activate  # On Linux/Mac
-# ou
-.venv\Scripts\activate  # On Windows
-
-# Installer les dépendances
-pip install -r PROJET/requirements.txt
+python -m pip install jupyter
+python -m notebook
 ```
 
-## 📊 Modèles et Résultats
+Executez les cellules depuis la racine du depot afin que les chemins relatifs, notamment `data/cityscapes`, soient resolus correctement. Un GPU est recommande pour l'entrainement.
 
-### PROJET - Segmentation CamVid
+## Ressources complementaires
 
-#### Checkpoints disponibles:
-- `best_unet_baseline.pth` - U-Net baseline
-- `best_unet_self_distill.pth` - U-Net avec self-distillation
-- `best_unet_self_distill_fixed.pth` - Version corrigée
-
-#### Métriques:
-- Voir `outputs/metrics/` pour les résultats complets
-- Comparaison: `baseline_vs_self_distill.csv`
-
-## 📈 Travaux Pratiques
-
-### TP1 - Préparation de Données
-- Nettoyage et prétraitement des données
-- Énumération des cibles
-- Gestion des valeurs manquantes
-
-### TP2 - Classification
-- Classification binaire (Anomalies bancaires, Maladies)
-- Régression (Consommation énergétique)
-
-### TP3-TP4
-- Travaux pratiques supplémentaires
-- Détection avec YOLOv8 sur radiographies thoraciques
-
-## 🛠️ Technologies Utilisées
-
-- **Framework**: PyTorch
-- **Segmentation**: UNet, Self-Distillation
-- **Détection**: YOLOv8
-- **Traitement**: OpenCV, Pillow
-- **Analyse**: Pandas, NumPy, Scikit-learn
-- **Visualisation**: Matplotlib, Seaborn
-
-## 📝 Utilisation
-
-Consultez les notebooks Jupyter pour des exemples d'utilisation :
-- `PROJET/notebooks/camvid_unet_selfdistill.ipynb`
-- `TP1/tp1_notebook.ipynb`
-- `TP2/*/multiclass.ipynb`
-- `TP4/notebook.ipynb`
-
-## 📄 Licence
-
-Projet personnel - Université
-
-## ✍️ Auteur
-
-**Jad Falaq**
+Le notebook `unet_selfdistill.ipynb` fait reference a des modules sous `src/` et a des checkpoints sous `checkpoints/`. Ces ressources ne font pas partie des fichiers publies ici; les cellules qui en dependent necessitent de les fournir separement.
